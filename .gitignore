@@ -1,0 +1,7 @@
+data/
+*.pyc
+.idea/
+*.zip
+*.tsp
+*.DS_Store
+__pycache__/
