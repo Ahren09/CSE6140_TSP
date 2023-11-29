@@ -52,17 +52,3 @@ def write_output(best_sol, path):
         f.write(str(round(best_sol.best_distance)) + "\n")
         f.write(','.join(str(vertex) for vertex in best_sol.best_path) + '\n')
 
-if __name__ == '__main__':
-    parser = argparse.ArgumentParser(description="Simulated Annealing for TSP")
-    parser.add_argument('-inst', dest='file', type=str)
-    parser.add_argument('-alg', dest='alg', type=str)
-    parser.add_argument('-time', dest='time_limit', type=int)
-    parser.add_argument('-seed', dest='seed', type=int, default=0)
-    args = parser.parse_args()
-
-    if args.alg == 'LS':
-        sa = main(args.file, args.seed, args.time_limit)
-        output_file = os.path.basename(args.file)[: -4] + '_' + args.alg + '_' + str(args.time_limit) + "_" + str(args.seed) + ".sol"
-        write_output(sa, output_file)
-    else:
-        print("Unsupported algorithm specified.")

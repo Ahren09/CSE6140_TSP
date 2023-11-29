@@ -1,22 +1,10 @@
-
 import itertools
-import math
 import time
 
-from utils import parse_tsp_data
+from utils import euclidean_distance
 
 
-def euclidean_distance(point1: int, point2: int):
-    """
-    Calculate Euclidean distance between two points
-
-    :param point1:
-    :param point2:
-    :return:
-    """
-    return math.sqrt((point1[0] - point2[0])**2 + (point1[1] - point2[1])**2)
-
-def brute_force_tsp(coords, time_limit):
+def brute_force_tsp(shared_data, stop_event, coords):
     """
     Brute-force TSP solution with time cut-off
     :param coords:
@@ -25,30 +13,33 @@ def brute_force_tsp(coords, time_limit):
     """
 
     start_time = time.time()
-    min_path = None
-    min_distance = float('inf')
+    shared_data['min_path'] = None
+    shared_data['min_distance'] = float('inf')
 
-    for path in itertools.permutations(coords.keys()):
-        # Check time limit
-        if time.time() - start_time > time_limit:
-            break
+    nodes = [int(n) for n in coords.index.values]
+    coords = coords.values.tolist()
+
+    N = len(coords)
+
+    # all_node_indices ranges from 0 to N-1
+    # N is the number of nodes (cities / locations)
+    all_node_indices = list(range(N))
+
+    for node_indices_of_path in itertools.permutations(all_node_indices):
+        if stop_event.is_set():
+            print("Time limit reached, stopping calculation.")
+            return
 
         # Calculate the total distance of the path
-        total_distance = sum(euclidean_distance(coords[path[i]], coords[path[i + 1]]) for i in range(len(path) - 1))
-        if total_distance < min_distance:
-            min_distance = total_distance
-            min_path = path
+        total_distance = sum(euclidean_distance(coords[node_indices_of_path[i]], coords[node_indices_of_path[i + 1]])
+                             for i in
+                             range(N - 1))
+        if total_distance < shared_data['min_distance']:
+            shared_data['min_distance'] = total_distance
 
-    return min_path, min_distance
+            path = [str(nodes[i]) for i in node_indices_of_path]
 
+            shared_data['min_path'] = path
 
-
-tsp_data = open("data/Atlanta.tsp", "r").read()
-
-coords = parse_tsp_data(tsp_data)
-
-# Set the time limit (in seconds)
-time_limit = 300
-
-
-brute_force_tsp(coords, time_limit)
+            # print(f"New best distance: {shared_data['min_distance']}")
+            # print(f"New best path: {shared_data['min_path']}")

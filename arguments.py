@@ -2,16 +2,12 @@ import argparse
 
 
 def parse_args():
-
-    parser = argparse.ArgumentParser(description="Dynamic Graph Embedding Trajectory.")
-    parser.add_argument('--dataset_name', type=str, required=True,
-                        help="Name of the dataset.")
+    parser = argparse.ArgumentParser(description="TSP")
+    parser.add_argument('-inst', dest='file', type=str)
+    parser.add_argument('-alg', choices=["BF", "Approx", "LS"], dest='alg', type=str)
+    parser.add_argument('-time', dest='time_limit', type=int)
+    parser.add_argument('-seed', dest='seed', type=int, default=0)
 
     args = parser.parse_args()
 
     return args
-
-
-
-
-

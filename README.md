@@ -2,6 +2,21 @@
 
 ### Getting Started
 
-* Download DATA.zip from Canvas and extract all files to the `data/` directory.
-* Run `python brute_force.py --dataset_name <DATASET_NAME>` to run the brute force algorithm on all graphs in the `data/` directory.
+Download `DATA.zip` from Canvas and extract all files to the `data/` directory.
+
+Run the program using the following script to 
+
+```bash
+python run_tsp.py -inst <filename> -alg [BF | Approx | LS] -time <cutoff_in_seconds> -seed <random_seed>
+```
+
+For example:
+
+* Run `python run_tsp.py -inst Atlanta.tsp -alg BF -time 600 -seed 0`: run the brute force algorithm on the `Atlanta` graph in the `data/` directory.
+
+### Requirements
+
+python >= 3.6
+
+
 
