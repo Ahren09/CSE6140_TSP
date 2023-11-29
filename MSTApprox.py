@@ -14,7 +14,7 @@
 # Example Usage:
 # tsp_instance_name = "city_name"
 # random_seed_value = 1
-# cutoff_time_value = 1
+# cutoff_time_value = 300
 # mst_approx_instance = MSTApprox(tsp_instance_name, random_seed_value, cutoff_time_value)
 # graph_data = mst_approx_instance.read_tsp_data()
 # mst_approx_instance.generate_tour(graph_data)
