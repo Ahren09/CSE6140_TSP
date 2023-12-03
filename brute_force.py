@@ -43,3 +43,7 @@ def brute_force_tsp(shared_data, stop_event, coords):
 
             # print(f"New best distance: {shared_data['min_distance']}")
             # print(f"New best path: {shared_data['min_path']}")
+    
+    end_time = time.time()
+    run_time = end_time - start_time
+    print(f"Running time: {run_time:.2f} seconds")
