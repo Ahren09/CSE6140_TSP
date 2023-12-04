@@ -86,6 +86,7 @@ def main(file_path, time_limit, seed):
     return sa
 
 if __name__ == '__main__':
+    start_time = time.time() 
     parser = argparse.ArgumentParser()
     parser.add_argument('-inst', required=True)
     parser.add_argument('-time', required=True, type=int)
@@ -96,6 +97,9 @@ if __name__ == '__main__':
     solution = main(args.inst, args.time, args.seed)
     output_filename = f"{os.path.splitext(os.path.basename(args.inst))[0]}_LS_{args.time}_{args.seed}.sol"
     get_result(solution, output_filename)
+    end_time = time.time()
+    run_time = end_time - start_time
+    print(f"Running time: {run_time:.4f} seconds")
 
 
 # python localSearch.py -inst data/Atlanta.tsp -time 60 -seed 42
