@@ -1,6 +1,7 @@
 import numpy as np
 import math
 import timeit as tt
+import time
 
 class MSTApprox:
     """ This class provides an approximate solution to the TSP
@@ -94,15 +95,21 @@ class MSTApprox:
 
     def get_result(self, path, total_distance):
         """ Writes the TSP tour and total distance to a solution file. """
-        file_name = f'{self.city}_MSTApprox_{self.cutoff_time}_{self.random_seed}.sol'
+        file_name = f'{self.city}_MSTApprox_{self.random_seed}.sol'
         with open(file_name, 'w') as file:
             file.write(f'{int(total_distance)}\n')
             file.write(','.join(map(str, path)))
 
 # Usage example:
+start_time = time.time() 
+
 tsp_instance_name = "Atlanta"
-random_seed_value = 1
+random_seed_value = 4
 cutoff_time_value = 300
 mst_approx_instance = MSTApprox(tsp_instance_name, random_seed_value, cutoff_time_value)
 graph_data = mst_approx_instance.read_tsp_data()
 mst_approx_instance.generate_tour(graph_data)
+
+end_time = time.time()
+run_time = end_time - start_time
+print(f"Running time: {run_time:.4f} seconds")
