@@ -68,7 +68,7 @@ def read_coordinates(file_path):
         coords = [tuple(map(float, line.split()[1:])) for line in lines[coords_start:coords_end]]
     return coords
 
-def get_result(best_sol, output_file):
+def get_localsearch_result(best_sol, output_file):
     """
     Write the solution to an output file.
     """
@@ -76,7 +76,7 @@ def get_result(best_sol, output_file):
         f.write(f"{int(round(best_sol.best_distance))}\n")
         f.write(','.join(str(vertex) for vertex in best_sol.best_path) + '\n')
 
-def main(file_path, time_limit, seed):
+def run_localsearch(file_path, time_limit, seed):
     coordinates = read_coordinates(file_path)
     random.seed(seed)
 
@@ -85,6 +85,7 @@ def main(file_path, time_limit, seed):
     sa.optimize(time_limit)
     return sa
 
+"""
 if __name__ == '__main__':
     start_time = time.time() 
     parser = argparse.ArgumentParser()
@@ -100,6 +101,6 @@ if __name__ == '__main__':
     end_time = time.time()
     run_time = end_time - start_time
     print(f"Running time: {run_time:.4f} seconds")
-
+"""
 
 # python localSearch.py -inst data/Atlanta.tsp -time 60 -seed 42

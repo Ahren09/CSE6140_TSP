@@ -4,7 +4,7 @@
 
 Download `DATA.zip` from Canvas and extract all files to the `data/` directory.
 
-Run the program using the following script to 
+Run the program using the following script 
 
 ```bash
 python run_tsp.py -inst <filename> -alg [BF | Approx | LS] -time <cutoff_in_seconds> -seed <random_seed>
