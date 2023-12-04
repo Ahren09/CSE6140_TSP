@@ -95,7 +95,7 @@ class MSTApprox:
 
     def get_result(self, path, total_distance):
         """ Writes the TSP tour and total distance to a solution file. """
-        file_name = f'{self.city}_MSTApprox_{self.random_seed}.sol'
+        file_name = f'{self.city}_Approx_{self.random_seed}.sol'
         with open(file_name, 'w') as file:
             file.write(f'{int(total_distance)}\n')
             file.write(','.join(map(str, path)))
