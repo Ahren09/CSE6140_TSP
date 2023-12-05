@@ -28,7 +28,7 @@ class MSTApprox:
         # convert to NumPy array for easy manipulation
         adjacency_matrix = np.array(graph)
         edges = []
-        visited_nodes = [self.random_seed]
+        visited_nodes = [np.random.choice(range(num_nodes))]
 
         while len(visited_nodes) < num_nodes:
             current_node = visited_nodes[-1]# to get the last visited node
@@ -65,7 +65,7 @@ class MSTApprox:
         # generate MST and create a TSP path from the MST
         self.path = []
         mst_edges = self.MST_algo(graph)
-        self.generate_path(mst_edges, self.random_seed)
+        self.generate_path(mst_edges, np.random.choice(range(len(graph))))
 
         # calculate the total distance of the TSP path
         self.total_distance = sum(graph[self.path[i]][self.path[i + 1]] for i in range(len(self.path) - 1))

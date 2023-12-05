@@ -1,6 +1,9 @@
 import os
 import os.path as osp
+import random
 import time
+
+import numpy as np
 
 from Approx import run_mst_approx
 from bak_Simulated_Anealing import main, write_output
@@ -15,6 +18,9 @@ if __name__ == "__main__":
 
     t0 = time.time()
 
+    random.seed(args.seed)
+    np.random.seed(args.seed)
+
     # Sanity-check for the instance name
 
     original_inst = args.inst
@@ -27,7 +33,7 @@ if __name__ == "__main__":
     # print(f"{original_inst} -> {args.inst}")
 
 
-
+    os.makedirs("output", exist_ok=True)
 
 
     if args.alg == "BF":
@@ -54,7 +60,8 @@ if __name__ == "__main__":
 
     elif args.alg == 'LS':
         solution = run_localsearch(args.inst, args.time_limit, args.seed)
-        output_filename = f"{os.path.splitext(os.path.basename(args.inst))[0].lower()}_LS_{args.time_limit}_{args.seed}.sol"
+        output_filename = (f"output/{os.path.splitext(os.path.basename(args.inst))[0].lower()}_LS_{args.time_limit}"
+                           f"_{args.seed}.sol")
         get_localsearch_result(solution, output_filename)
 
 
@@ -62,7 +69,7 @@ if __name__ == "__main__":
         run_mst_approx(args.inst, args.seed, args.time_limit)
 
         # sa = main(args.inst, args.seed, args.time_limit)
-        output_file = os.path.basename(args.inst)[: -4].lower() + '_' + args.alg + '_' + str(args.time_limit) + "_" + str(
+        output_file = args.inst.lower() + '_' + args.alg + '_' + str(args.time_limit) + "_" + str(
             args.seed) + ".sol"
         # write_output(sa, output_file)
 
