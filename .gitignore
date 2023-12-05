@@ -1,8 +1,6 @@
-data/
 *.pyc
 .idea/
 *.zip
-*.tsp
 *.DS_Store
 __pycache__/
 *.sol

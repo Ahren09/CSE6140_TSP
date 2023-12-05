@@ -2,6 +2,7 @@ import os
 import os.path as osp
 import time
 
+from Approx import run_mst_approx
 from bak_Simulated_Anealing import main, write_output
 from arguments import parse_args
 from brute_force import brute_force_tsp
@@ -13,6 +14,20 @@ if __name__ == "__main__":
     args = parse_args()
 
     t0 = time.time()
+
+    # Sanity-check for the instance name
+
+    original_inst = args.inst
+
+    if ".tsp" in args.inst:
+        if args.inst.lower().startswith("data/") or args.inst.lower().endswith(".tsp"):
+            # Format: "Data/Atlanta.tsp"
+            args.inst = args.inst.split('/')[-1].split(".tsp")[0]
+
+    print(f"{original_inst} -> {args.inst}")
+
+
+
 
 
     if args.alg == "BF":
@@ -43,10 +58,12 @@ if __name__ == "__main__":
 
 
     elif args.alg == 'Approx':
-        sa = main(args.inst, args.seed, args.time_limit)
+        run_mst_approx(args.inst, args.seed, args.time_limit)
+
+        # sa = main(args.inst, args.seed, args.time_limit)
         output_file = os.path.basename(args.inst)[: -4].lower() + '_' + args.alg + '_' + str(args.time_limit) + "_" + str(
             args.seed) + ".sol"
-        write_output(sa, output_file)
+        # write_output(sa, output_file)
 
     else:
         print("Unsupported algorithm specified.")

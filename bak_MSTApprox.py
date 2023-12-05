@@ -23,6 +23,9 @@ import numpy as np
 import math
 import timeit as tt
 
+from utils import get_tsp_filename
+
+
 class MSTApprox:
 
     def __init__(self, city_instance, random_seed, cutoff_time=600):
@@ -89,7 +92,7 @@ class MSTApprox:
 
     def read_tsp_data(self):
         tsp_data = []
-        with open(f'./DATA/{self.city}.tsp') as file:
+        with open(get_tsp_filename(self.city)) as file:
             next(file)  # Skip the first five lines
             next(file)
             next(file)

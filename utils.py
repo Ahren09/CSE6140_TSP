@@ -1,9 +1,24 @@
 # Adjusted parsing function to skip header lines
 import math
 from typing import Tuple
+import os.path as osp
 
 import numpy as np
 import pandas as pd
+
+
+
+def get_tsp_filename(city: str) -> str:
+    if osp.exists(osp.join("data", f"{city}.tsp")):
+        return osp.join("data", f"{city}.tsp")
+
+    elif osp.exists(f"{city}.tsp"):
+        return f"{city}.tsp"
+
+    else:
+        print(f"WARNING: File {city}.tsp not found!")
+        return f"{city}.tsp"
+
 
 
 def parse_tsp_data(data) -> pd.DataFrame:

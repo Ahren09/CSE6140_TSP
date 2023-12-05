@@ -3,6 +3,9 @@ import math
 import timeit as tt
 import time
 
+from utils import get_tsp_filename
+
+
 class MSTApprox:
     """ This class provides an approximate solution to the TSP
     using a Minimum Spanning Tree approach. """
@@ -77,7 +80,7 @@ class MSTApprox:
         Reads TSP data from a file and generates a graph represented by a distance matrix. 
         """
         # open tsp file and read 
-        with open(f'./DATA/{self.city}.tsp') as file:
+        with open(get_tsp_filename(self.city)) as file:
             lines = file.readlines()
             coordinates = [line.strip().split(' ') for line in lines if line.strip() and line[0].isdigit()]
             coordinates = [(float(x), float(y)) for _, x, y in coordinates]
@@ -95,21 +98,35 @@ class MSTApprox:
 
     def get_result(self, path, total_distance):
         """ Writes the TSP tour and total distance to a solution file. """
-        file_name = f'{self.city}_Approx_{self.random_seed}.sol'
+        file_name = f'{self.city.lower()}_Approx_{self.random_seed}.sol'
         with open(file_name, 'w') as file:
             file.write(f'{int(total_distance)}\n')
             file.write(','.join(map(str, path)))
 
 # Usage example:
-start_time = time.time() 
 
-tsp_instance_name = "Atlanta"
-random_seed_value = 4
-cutoff_time_value = 300
-mst_approx_instance = MSTApprox(tsp_instance_name, random_seed_value, cutoff_time_value)
-graph_data = mst_approx_instance.read_tsp_data()
-mst_approx_instance.generate_tour(graph_data)
+def run_mst_approx(inst, seed, time_limit):
+    """ 
+    Runs the MSTApprox method with the given parameters. 
+    """
+    mst_approx_instance = MSTApprox(inst, seed, time_limit)
+    graph_data = mst_approx_instance.read_tsp_data()
+    mst_approx_instance.generate_tour(graph_data)
 
-end_time = time.time()
-run_time = end_time - start_time
-print(f"Running time: {run_time:.4f} seconds")
+
+
+"""
+if __name__ == '__main__':
+    start_time = time.time() 
+    
+    inst = "Atlanta"
+    seed = 4
+    time_limit = 300
+    mst_approx_instance = MSTApprox(inst, seed, time_limit)
+    graph_data = mst_approx_instance.read_tsp_data()
+    mst_approx_instance.generate_tour(graph_data)
+    
+    end_time = time.time()
+    run_time = end_time - start_time
+    print(f"Running time: {run_time:.4f} seconds")
+"""
