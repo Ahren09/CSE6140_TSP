@@ -8,7 +8,7 @@ from arguments import parse_args
 from brute_force import brute_force_tsp
 from localSearch import run_localsearch, get_localsearch_result
 from timeout import TimeoutException, function_with_timeout
-from utils import parse_tsp_data
+from utils import parse_tsp_data, get_tsp_filename
 
 if __name__ == "__main__":
     args = parse_args()
@@ -33,7 +33,7 @@ if __name__ == "__main__":
     if args.alg == "BF":
 
         results = {'best_result': None}
-        tsp_data = open(osp.join("data", args.inst), "r").read()
+        tsp_data = open(get_tsp_filename(args.inst), "r").read()
         coords = parse_tsp_data(tsp_data)
 
         try:
