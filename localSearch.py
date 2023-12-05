@@ -10,7 +10,7 @@ from utils import get_tsp_filename
 
 
 class SimulatedAnnealing:
-    def __init__(self, coordinates, temp, cooling_rate=0.99):
+    def __init__(self, coordinates, temp, cooling_rate=0.9999):
         """
         Initialize the Simulated Annealing (Local Search method)  with the given coordinates and parameters.
         """
@@ -84,7 +84,7 @@ def run_localsearch(inst, time_limit, seed):
     random.seed(seed)
 
     # intizlize algo and optize it
-    sa = SimulatedAnnealing(coordinates, temp=1000)
+    sa = SimulatedAnnealing(coordinates, temp=10000)
     sa.optimize(time_limit)
     return sa
 

@@ -51,7 +51,7 @@ class MSTApprox:
         """
         if node not in self.path:
             self.path.append(node)
-            # find all children of the current node 
+            # find all children of the current node
             children = [target for source, target in edges if source == node]
             for child in children:
                 self.generate_path(edges, child)
@@ -98,7 +98,7 @@ class MSTApprox:
 
     def get_result(self, path, total_distance):
         """ Writes the TSP tour and total distance to a solution file. """
-        file_name = f'{self.city.lower()}_Approx_{self.random_seed}.sol'
+        file_name = f'output/{self.city.lower()}_Approx_{self.random_seed}.sol'
         with open(file_name, 'w') as file:
             file.write(f'{int(total_distance)}\n')
             file.write(','.join(map(str, path)))
