@@ -24,7 +24,7 @@ if __name__ == "__main__":
             # Format: "Data/Atlanta.tsp"
             args.inst = args.inst.split('/')[-1].split(".tsp")[0]
 
-    print(f"{original_inst} -> {args.inst}")
+    # print(f"{original_inst} -> {args.inst}")
 
 
 
@@ -43,7 +43,8 @@ if __name__ == "__main__":
         except TimeoutException as e:
             print(f"Timeout at {args.time_limit} seconds")
 
-        output_file = os.path.basename(args.inst)[: -4] + '_' + args.alg + '_' + str(args.time_limit) + ".sol"
+        output_file = f'output/{args.inst}_{args.alg}_{str(args.time_limit)}.sol'
+        os.makedirs("output", exist_ok=True)
 
         # Open a file in write mode ('w' or 'wt' for text files)
         with open(output_file, 'w') as file:

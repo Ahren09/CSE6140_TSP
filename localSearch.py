@@ -6,6 +6,9 @@ import time
 import argparse
 import os
 
+from utils import get_tsp_filename
+
+
 class SimulatedAnnealing:
     def __init__(self, coordinates, temp, cooling_rate=0.99):
         """
@@ -76,8 +79,8 @@ def get_localsearch_result(best_sol, output_file):
         f.write(f"{int(round(best_sol.best_distance))}\n")
         f.write(','.join(str(vertex) for vertex in best_sol.best_path) + '\n')
 
-def run_localsearch(file_path, time_limit, seed):
-    coordinates = read_coordinates(file_path)
+def run_localsearch(inst, time_limit, seed):
+    coordinates = read_coordinates(get_tsp_filename(inst))
     random.seed(seed)
 
     # intizlize algo and optize it

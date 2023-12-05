@@ -1,8 +1,8 @@
 *.pyc
 .idea/
+dist/
 *.zip
 *.DS_Store
 __pycache__/
-*.sol
 build/
 *.spec
