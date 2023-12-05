@@ -6,7 +6,6 @@ import time
 import numpy as np
 
 from Approx import run_mst_approx
-from bak_Simulated_Anealing import main, write_output
 from arguments import parse_args
 from brute_force import brute_force_tsp
 from localSearch import run_localsearch, get_localsearch_result
