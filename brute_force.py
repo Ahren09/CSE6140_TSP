@@ -35,8 +35,9 @@ def brute_force_tsp(shared_data, stop_event, coords):
                              for i in
                              range(N - 1))
         if total_distance < shared_data['min_distance']:
+            # Update the best path and distance
+            
             shared_data['min_distance'] = total_distance
-
             path = [str(nodes[i]) for i in node_indices_of_path]
 
             shared_data['min_path'] = path
