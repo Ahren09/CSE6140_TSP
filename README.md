@@ -23,7 +23,14 @@ To run approximation:
 
 * `python run_tsp.py -inst Atlanta.tsp -alg Approx -time 600 -seed 0`
 
-  
+Alternatively, you can also use our provided `exec` file, which is just a bash script:
+
+* `./exec -inst Atlanta.tsp -alg BF -time 600 -seed 0`
+* `./exec -inst Atlanta.tsp -alg LS -time 600 -seed 0`
+* `./exec -inst Atlanta.tsp -alg Approx -time 600 -seed 0`
+
+
+
 ### Requirements
 
 python >= 3.6
